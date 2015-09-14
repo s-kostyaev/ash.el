@@ -19,12 +19,12 @@ into `.emacs`.
 
 In new buffer `*ash inbox*` move cursor to pull request url. Now you
 may:
-- `ash-review` for overview current PR
+- `C-c C-r` or `ash-review` for overview current PR
 - `ash-approve` for approve current PR
 - `ash-decline` for decline current PR
-- `ash-ls` for list of files in current PR in new buffer. In this
+- `C-c C-l` or `ash-ls` for list of files in current PR in new buffer. In this
 buffer you may:
-    - `ash-review-file` for review file at point
-    - `ash-review` for overview current PR
+    - `C-c C-f` or `ash-review-file` for review file at point
+    - `C-c C-r` or `ash-review` for overview current PR
     - `ash-approve` for approve current PR
     - `ash-decline` for decline current PR

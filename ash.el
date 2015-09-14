@@ -23,56 +23,15 @@
 ;;
 
 ;; Code:
-
-(defcustom ash-editor "emacsclient"
-  "Editor for using with ash. Emacsclient by default")
+(require 'ash-mode)
 
 (defun ash-inbox ()
   "Open ash inbox in *ash inbox* buffer"
   (interactive)
   (if (get-buffer "*ash inbox*") (kill-buffer "*ash inbox*"))
   (start-process-shell-command "ash inbox" "*ash inbox*" "ash inbox")
-  (switch-to-buffer "*ash inbox*"))
-
-(defun ash-ls ()
-  "Open list of files in repo under cursor. Work only in *ash inbox* buffer"
-  (interactive)
-  (if (string-equal (buffer-name) "*ash inbox*")
-  (async-shell-command (concat "ash " (ffap-string-at-point) " ls")
-                       (ffap-string-at-point) "*ash errors*")
-  (message "ash-ls work only in *ash inbox* buffer")))
-
-(defun ash-review-file ()
-  "Review file under cursor. Use it after ash-ls"
-  (interactive)
-  (if (string-equal (buffer-name) "*ash inbox*")
-      (message "ash-review-file not for work in *ash inbox* buffer. Use it after ash-ls instead")
-    (start-process "ash" "*ash*" "ash" "-e" ash-editor (buffer-name) "review"
-                 (ffap-string-at-point))))
-
-(defun ash-review ()
-  "Review current pull request (under cursor or in buffer)"
-  (interactive)
-  (defvar review-url (buffer-name) "url for review")
-  (if (string-equal (buffer-name) "*ash inbox*") (set 'review-url
-                                                      (ffap-string-at-point)))
-  (start-process "ash" "*ash*" "ash" "-e" ash-editor review-url "review"))
-
-(defun ash-approve ()
-  "Approve current pull request (under cursor or in buffer)"
-  (interactive)
-  (defvar review-url (buffer-name) "url for review")
-  (if (string-equal (buffer-name) "*ash inbox*") (set 'review-url
-                                                      (ffap-string-at-point)))
-  (start-process "ash" "*ash*" "ash" review-url "approve"))
-
-(defun ash-decline ()
-  "Decline current pull request (under cursor or in buffer)"
-  (interactive)
-  (defvar review-url (buffer-name) "url for review")
-  (if (string-equal (buffer-name) "*ash inbox*") (set 'review-url
-                                                      (ffap-string-at-point)))
-  (start-process "ash" "*ash*" "ash" review-url "decline"))
+  (switch-to-buffer "*ash inbox*")
+  (ash-mode))
 
 
 (provide 'ash)
