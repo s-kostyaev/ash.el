@@ -34,6 +34,8 @@
     map)
   "Keymap for ash mode")
 
+(defvar ash-review-url "" "url for review")
+
 (defun ash-mode ()
   "Major mode for work with ash"
   (interactive)
@@ -75,7 +77,7 @@
   "Review current pull request (under cursor or in buffer)"
   (interactive)
   (must-ash-mode
-   (defvar review-url (buffer-name) "url for review")
+   (set 'review-url (buffer-name))
    (if (string-equal (buffer-name) "*ash inbox*") (set 'review-url
                                                        (ffap-string-at-point)))
    (start-process "ash" "*ash*" "ash" "-e" ash-editor review-url "review")))
@@ -84,7 +86,7 @@
   "Approve current pull request (under cursor or in buffer)"
   (interactive)
   (must-ash-mode
-   (defvar review-url (buffer-name) "url for review")
+   (set 'review-url (buffer-name))
    (if (string-equal (buffer-name) "*ash inbox*") (set 'review-url
                                                        (ffap-string-at-point)))
    (start-process "ash" "*ash*" "ash" review-url "approve")))
@@ -93,7 +95,7 @@
   "Decline current pull request (under cursor or in buffer)"
   (interactive)
   (must-ash-mode
-   (defvar review-url (buffer-name) "url for review")
+   (set 'review-url (buffer-name))
    (if (string-equal (buffer-name) "*ash inbox*") (set 'review-url
                                                        (ffap-string-at-point)))
    (start-process "ash" "*ash*" "ash" review-url "decline")))
