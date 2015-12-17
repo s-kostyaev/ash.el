@@ -1,3 +1,7 @@
+# Warning
+
+This package is deprecated. Use [helm-ash](https://github.com/s-kostyaev/helm-ash) instead.
+
 # Introduction
 
 ash.el is simple integration [ash](https://github.com/seletskiy/ash)
